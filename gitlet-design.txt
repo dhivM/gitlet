@@ -1,0 +1,62 @@
+Gitlet Design Document
+----------------------
+
+Classes and Data Structures
+---------------------------
+The classes are:
+1. Main
+-This is where the user-inputted arguments are first received and then processed.
+
+**Fields**
+ArrayList<String> : Containing all calid user arguments so for error catching
+
+2. Repo
+-This is where the arguments called in main is carried out. Receives all the arguments and
+subsequently edits the .gitlet folder.
+
+**Fields**
+head: to keep track of the head commit
+removeArray: to keep track of files to be removed
+addArray: to keep track of files to be added
+
+3. Commit
+-This is where the commit object is created.
+
+**Fields**
+message: holds commit message
+parent: holds commit parent
+timestamp: holds commit date and time in format specified
+Hashmap<String, String>: holds<filename: blob> to be stored in .gitlet folder
+
+4. Staging
+Class that deals with adding and removing and modifying files in .gitlet folder.
+
+
+Algorithms
+----------
+1. Staging:
+
+a) stageAdd: add items to add folder or remove folder
+b) commitAdd: add items to commit folder
+
+2. Repo:
+a) All twelve commands we need to implement.
+b) giveHead() return commit that is the head
+
+3. Commit:
+a) giveMessage(): return message of a commit object
+b) giveDate(): return date of a commit object
+
+Persistence
+-----------
+1. When the repo is initialized, repo has an init method that creates all the directories we'd store things in
+namely; stage, commits, blobs. In stage we have a 'to Add' and 'to Remove' folder to keep track of files we added
+or have to remove. Head file with commit object stored inside is necessary to access information about the head commit.
+
+2. When add is called, we add to the staging/toAdd folder where filename = name of file and content of file = content
+of file.
+
+3. When commit is made; we store the sha1 of commit object in commit folder as filename and the sha1 of the relevant blobs
+of all files in the commit in the blob folder
+
+4. Head file is called head and as contents, it has the commit object that is the head.
